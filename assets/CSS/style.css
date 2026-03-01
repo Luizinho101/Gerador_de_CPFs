@@ -1,0 +1,38 @@
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+main{
+    margin: 20px;
+    background-color: #e6e2e2;
+}
+.container{
+  border-radius: 10px;
+  box-shadow: 5px 5px 10px #cdc7c7, 
+             -5px -5px 10px #ffffff;
+}
+
+.container > div{
+    
+    margin-bottom: 20px;
+    margin-left: 10px;
+    margin-right: 10px;
+}
+
+button{
+    background-color: rgb(54, 207, 113);
+    border-radius: 8px;
+    color: white;
+    border: none;
+    padding: 10px;
+    margin-bottom: 10px;
+}
+.div-botao{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
