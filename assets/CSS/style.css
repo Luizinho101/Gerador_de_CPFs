@@ -31,8 +31,17 @@ button{
     padding: 10px;
     margin-bottom: 10px;
 }
-.div-botao{
-  display: flex;
-  justify-content: center;
-  align-items: center;
+#resposta{
+    padding: 20px;
+}
+
+.centraliza-Horizontalmente{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.informacoes{
+    display: flex;
+    flex-direction:column;
+    padding-top: 30px;
 }
