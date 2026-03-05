@@ -8,11 +8,13 @@
 
 main{
     margin: 20px;
-    background-color: #e6e2e2;
+    background-color: #ffffff;
+    height: 100vh;
 }
 .container{
-  border-radius: 10px;
-  box-shadow: 5px 5px 10px #cdc7c7, 
+    margin-top: 100px;
+    border-radius: 10px;
+    box-shadow: 5px 5px 10px #cdc7c7, 
              -5px -5px 10px #ffffff;
 }
 
@@ -44,4 +46,17 @@ button{
     display: flex;
     flex-direction:column;
     padding-top: 30px;
+}
+
+@media screen and (min-width: 720px ) and  ( max-width:1200px) {
+    section{
+        margin: 20%  20%;
+    }
+    
+}
+@media screen and (min-width: 1200px ) {
+    section{
+        margin: 30%  30%;
+    }
+    
 }
