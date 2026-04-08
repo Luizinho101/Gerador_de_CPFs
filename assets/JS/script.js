@@ -17,6 +17,13 @@ function main(){
         copiarCPF();
     }
 
+    const btn_gerarPontuacao = document.createElement('button');
+    btn_gerarPontuacao.textContent = 'Colocar pontuação';
+    btn_gerarPontuacao.id = 'btn_geraPontuacao';
+    btn_gerarPontuacao.onclick = function (){
+        gerarPotucaoCPF()
+    }
+
 
     for(let i =0; i < 9; i ++){
         let numeroAleatorio = geraValorAleatorio(0, 9);
@@ -38,6 +45,7 @@ function main(){
 
     container.appendChild(p);
     container.appendChild(btn_copiar);
+    container.appendChild(btn_gerarPontuacao);
 
     //document.getElementById('resposta').innerHTML = convertido + '<p>Copiar</p>';
 }
@@ -92,4 +100,12 @@ function copiarCPF(){
     }).catch(err => {
         console.error("Erro ao copiar: ", err);
     })
+}
+
+function gerarPotucaoCPF(){
+
+    const cpfTexto = document.getElementById('id_paragrafo').innerText;
+    const cpfFormatado =  cpfTexto.replace(/(\d{3})(\d{3})(\d{3})(\d{2})/, "$1.$2.$3-$4");
+    alert(cpfFormatado);
+    return cpfFormatado;
 }
