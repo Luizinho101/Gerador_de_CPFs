@@ -1,9 +1,22 @@
+const { createElement } = require("react");
 
 function main(){
 
     let cpf = [];
 
-    console.log("Olá mundo")
+    const container = document.getElementById("resposta");
+    container.innerHTML = '';
+
+    const p = document.createElement('p');
+    p.id = 'id_paragrafo';
+
+
+    const btn_copiar = document.createElement('button');
+    btn_copiar.textContent = 'Copiar'
+    btn_copiar.onclick = function (){
+        copiarCPF();
+    }
+
 
     for(let i =0; i < 9; i ++){
         let numeroAleatorio = geraValorAleatorio(0, 9);
@@ -21,9 +34,12 @@ function main(){
 
     let convertido = cpf.join('');
 
-     console.log(convertido);
+    p.innerHTML = convertido;
 
-    document.getElementById('resposta').innerHTML = convertido;
+    container.appendChild(p);
+    container.appendChild(btn_copiar);
+
+    //document.getElementById('resposta').innerHTML = convertido + '<p>Copiar</p>';
 }
 
 function geraValorAleatorio(min, max) {
@@ -65,4 +81,15 @@ function validaSegundoNumero(array, valor2){
         restoDIvisao = 0;
     }      
     return restoDIvisao;
+}
+
+function copiarCPF(){
+
+    const cpfTexto = document.getElementById('id_paragrafo').innerText;
+
+    navigator.clipboard.writeText(cpfTexto).then(() => {
+        alert("CPF copiado com sucesso!");
+    }).catch(err => {
+        console.error("Erro ao copiar: ", err);
+    })
 }
