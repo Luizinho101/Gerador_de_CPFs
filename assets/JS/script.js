@@ -1,55 +1,43 @@
-const { createElement } = require("react");
+function main() {
+    const container = document.getElementById("resposta");
+    const opcaoSelecionada = document.querySelector('input[name="format"]:checked');
 
-function main(){
+    if (!opcaoSelecionada) {
+        alert("Selecione uma opção!");
+        return;
+    }
 
+    container.innerHTML = ''; 
     let cpf = [];
 
-    const container = document.getElementById("resposta");
-    container.innerHTML = '';
+    for (let i = 0; i < 9; i++) {
+        cpf[i] = geraValorAleatorio(0, 9);
+    }
+    cpf[9] = validaPrimeiroNumero(cpf, 10);
+    cpf[10] = validaSegundoNumero(cpf, 11);
 
+    let convertido = cpf.join(''); 
+
+    
     const p = document.createElement('p');
     p.id = 'id_paragrafo';
+    p.textContent = convertido; 
+    container.appendChild(p);
+
+   
+    if (opcaoSelecionada.value === "true") {
+        const cpfComPontos = gerarPotucaoCPF(); 
+        p.textContent = cpfComPontos;
+    }
 
 
     const btn_copiar = document.createElement('button');
-    btn_copiar.textContent = 'Copiar'
-    btn_copiar.onclick = function (){
+    btn_copiar.textContent = 'Copiar';
+    btn_copiar.onclick = function() {
         copiarCPF();
-    }
-
-    const btn_gerarPontuacao = document.createElement('button');
-    btn_gerarPontuacao.textContent = 'Colocar pontuação';
-    btn_gerarPontuacao.id = 'btn_geraPontuacao';
-    btn_gerarPontuacao.onclick = function (){
-        gerarPotucaoCPF()
-    }
-
-
-    for(let i =0; i < 9; i ++){
-        let numeroAleatorio = geraValorAleatorio(0, 9);
-
-        cpf[i] = numeroAleatorio;
-    }
-
-    let primeiroValidador = validaPrimeiroNumero(cpf, 10);
-   
-
-    cpf[9] = primeiroValidador;
-
-     let segundoValidador = validaSegundoNumero(cpf, 11);
-    cpf[10] = segundoValidador;
-
-    let convertido = cpf.join('');
-
-    p.innerHTML = convertido;
-
-    container.appendChild(p);
+    };
     container.appendChild(btn_copiar);
-    container.appendChild(btn_gerarPontuacao);
-
-    //document.getElementById('resposta').innerHTML = convertido + '<p>Copiar</p>';
 }
-
 function geraValorAleatorio(min, max) {
   return Math.floor(Math.random() * (max - min + 1)) + min; 
 }

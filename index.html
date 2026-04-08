@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="pt-br">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -7,27 +7,37 @@
     <title>Gerador de CPFs</title>
 </head>
 <body>
-    <header>
 
-    </header>
-    <main>
-        <section class="container , centraliza-Verticalmente">
-            <div class="centraliza-Horizontalmente , informacoes ">
+    <main class="container">
+        <section class="generator-box">
+            <header class="generator-header">
                 <h1>Gerador de CPFs</h1>
-                <p>Basta clicar no botão "Gerar CPF" para que seja criado um CPF válido </p>
+                <p>Clique no botão para criar um CPF válido.</p>
+            </header>
+
+            <div class="generator-controls">
+                <p>Gerar com pontuação?</p>
+                
+                <div class="radio-group">
+                    <label>
+                        <input id="idSim" type="radio" name="format" value="true" checked> Sim
+                    </label>
+                    <label>
+                        <input id="idNao" type="radio" name="format" value="false"> Não
+                    </label>
+                </div>
+
+                <button type="button" class="btn-generate" onclick="main()">
+                    Gerar CPF
+                </button>
             </div>
-            <div class="div-botao , centraliza-Horizontalmente">
-                <button type="button" onclick="main()">Gerar CPF</button>
-            </div>
-            <div class="centraliza-Horizontalmente">
-                <p id="resposta"></p>
+
+            <div class="generator-result">
+                <p id="resposta">---</p>
             </div>
         </section>
     </main>
 
-    <footer>
-
-    </footer>
     <script src="assets/JS/script.js"></script>
 </body>
 </html>
