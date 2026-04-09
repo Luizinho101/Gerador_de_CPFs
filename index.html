@@ -7,33 +7,34 @@
     <title>Gerador de CPFs</title>
 </head>
 <body>
-
     <main class="container">
         <section class="generator-box">
-            <header class="generator-header">
-                <h1>Gerador de CPFs</h1>
-                <p>Clique no botão para criar um CPF válido.</p>
-            </header>
+            <div>
+                <h1 class="color-titulo pg-formatacao">Gerador de CPFs</h1>
+                <p class="pg-formatacao">Clique no botão para criar um CPF válido.</p>
+            </div>
 
             <div class="generator-controls">
-                <p>Gerar com pontuação?</p>
+                <p class="pg-formatacao">Formatação : </p>
                 
                 <div class="radio-group">
                     <label>
-                        <input id="idSim" type="radio" name="format" value="true" checked> Sim
+                        <input id="idSim" type="radio" name="format" value="true" checked> Com Pontuação
                     </label>
                     <label>
-                        <input id="idNao" type="radio" name="format" value="false"> Não
+                        <input id="idNao" type="radio" name="format" value="false"> Sem Pontuação
                     </label>
                 </div>
 
-                <button type="button" class="btn-generate" onclick="main()">
-                    Gerar CPF
-                </button>
-            </div>
-
-            <div class="generator-result">
-                <p id="resposta">---</p>
+                <div class="div-botoes">
+                    <button type="button" class="btn-generate" onclick="main()">
+                        Gerar CPF
+                    </button>
+                </div>
+                <div class="generator-result">
+                    <p>Resultado: </p>
+                    <p id="resposta"></p>
+                </div>
             </div>
         </section>
     </main>
