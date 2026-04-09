@@ -7,19 +7,19 @@
 }
 
 
-.generator-controls{
-    margin-top: 100px;
+.gerador-controls{
+    margin-top: 10%;
     border-radius: 10px;
     box-shadow: 5px 5px 10px #959292, 
          -5px -5px 10px #928a8a;
 }
 
-.color-titulo{
+.cor-titulo{
     color:  #145d8a;
 }
 
 
-.btn-generate{
+.btn-gerador{
     background-color: #2992d4;
     border-radius: 8px;
     color: white;
@@ -27,6 +27,10 @@
     margin-bottom: 10px;
     padding: 10px;
     width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center; 
+    gap: 8px;
 }
 
 
@@ -42,34 +46,51 @@
     display: flex;
     justify-content: center;
 }
-.generator-controls{
+.gerador-controls{
     padding: 5%;
 }
-.generator-controls > p , .generator-controls > div {
+.gerador-controls > p , .generator-controls > div {
     margin-bottom: 20px;
 }
-.generator-result{
+.gerar-result{
     display: flex;
     align-items: center;
     flex-direction: column;
     justify-content: center;
-    background-color: #c0c7cb;
+    background-color: #b9c0c4;
     padding: 30px;
     border-radius: 10px;
 }
+
 #resposta{
+  
     background-color: white;
     width: 100%;
     padding: 15px;
 }
 
-@media screen and (min-width: 720px ) and  ( max-width:1200px) {
 
-    
+/* estilizando com bootstrap */
+.bi-dash-circle{
+    color: red;
 }
-@media screen and (max-width: 300px ) {
+.bi-check-circle{
+    color: rgb(31, 206, 31);
+}
+.bi-copy{
+    padding: 10px 30px;
+    background-color: #ffffff;
+    text-align:end;
+    border: solid #928a8a 2px;
+    border-radius: 5px;
+}
+
+
+/* até 300 px */
+
+@media screen and (max-width: 480px ) {
     
-    .generator-box{
+    .gerar-box{
         margin: 4%;
     }
     .radio-group{
@@ -77,18 +98,50 @@
         flex-direction: column;
         align-items: center;
     }
-
-    .generator-result{
-        display: flex;
-        align-items: center;
-        flex-direction: column;
-        justify-content: center;
-        background-color: #c0c7cb;
-        padding: 20px;
-        border-radius: 10px;
+    .radio-group > label {
+        margin-bottom: 5%;
     }
+    .gerar-result > p{
+        margin-bottom: 5%;
+    }
+    #resposta{
+        justify-items: center;
+        justify-content: center;
+    }
+    #id_btn_copiar{
+        display: flex;
+        justify-items: center;
+        gap: 10px;
+    }
+
+ 
 }
 
-@media screen and (max-width: 1200px ) {
-    
+@media screen and (min-width: 481px ) and  ( max-width:1023px) {
+
+    .radio-group > label {
+        margin-bottom: 5%;
+    }
+    .gerar-result > p{
+        margin-bottom: 5%;
+    }
+    .gerar-box{
+        padding:5% 20%;
+    }
+    #resposta{
+        display: flex;
+        flex-direction: row;
+        background-color: white;
+        width: 100%;
+        padding: 15px;
+    }
+    #id_paragrafo{
+        width: 100%;
+    }
+    #id_btn_copiar{
+        display: flex;
+        flex-direction: row;
+        gap: 10px;
+        padding: 10px 20px;
+    }
 }

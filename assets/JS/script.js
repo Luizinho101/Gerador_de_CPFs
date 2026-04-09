@@ -18,7 +18,7 @@ function main() {
 
     let convertido = cpf.join(''); 
 
-    
+
     const p = document.createElement('p');
     p.id = 'id_paragrafo';
     p.textContent = convertido; 
@@ -32,10 +32,14 @@ function main() {
 
 
     const btn_copiar = document.createElement('button');
+    btn_copiar.className = 'bi-copy';
+    btn_copiar.id = 'id_btn_copiar'
     btn_copiar.textContent = 'Copiar';
     btn_copiar.onclick = function() {
         copiarCPF();
     };
+
+    
     container.appendChild(btn_copiar);
 }
 function geraValorAleatorio(min, max) {
