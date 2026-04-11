@@ -42,7 +42,7 @@ Confira o projeto em funcionamento:
 
 ![Demonstração para Desktop](./assets/img/Desktop.png)
 ![Demonstração para Desktop Com Pontuação](./assets/img/Desktop_Com_Pontuacao.png)
-![Demonstração para Desktop Sem Pontuação](./assets/img/gerador_CPFs_03.png)
+![Demonstração para Desktop Sem Pontuação](./assets/img/Desktop_Sem_Pontuacao.png)
 
 2 . Para telas menores
 
