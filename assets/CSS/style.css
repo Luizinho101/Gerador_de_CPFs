@@ -117,6 +117,8 @@
  
 }
 
+
+
 @media screen and (min-width: 481px ) and  ( max-width:1023px) {
 
     .radio-group > label {
@@ -127,6 +129,35 @@
     }
     .gerar-box{
         padding:5% 20%;
+    }
+    #resposta{
+        display: flex;
+        flex-direction: row;
+        background-color: white;
+        width: 100%;
+        padding: 15px;
+    }
+    #id_paragrafo{
+        width: 100%;
+    }
+    #id_btn_copiar{
+        display: flex;
+        flex-direction: row;
+        gap: 10px;
+        padding: 10px 20px;
+    }
+}
+
+
+@media screen and (min-width: 1024px ){
+        .radio-group > label {
+        margin-bottom: 5%;
+    }
+    .gerar-result > p{
+        margin-bottom: 5%;
+    }
+    .gerar-box{
+        padding:5% 30%;
     }
     #resposta{
         display: flex;
