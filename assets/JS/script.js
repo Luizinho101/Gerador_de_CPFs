@@ -2,102 +2,93 @@ function main() {
     const container = document.getElementById("resposta");
     const opcaoSelecionada = document.querySelector('input[name="format"]:checked');
 
-    if (!opcaoSelecionada) {
-        alert("Selecione uma opção!");
-        return;
-    }
 
-    container.innerHTML = ''; 
-    let cpf = [];
+    container.innerHTML = '';
 
-    for (let i = 0; i < 9; i++) {
-        cpf[i] = geraValorAleatorio(0, 9);
-    }
-    cpf[9] = validaPrimeiroNumero(cpf, 10);
-    cpf[10] = validaSegundoNumero(cpf, 11);
+    let cpf = ''; 
+    let tamanho;
+    do {
+        tamanho = geraNumerosBase(0, 9);
+    } while (pegaSequenciaRepetida(tamanho));
+  
+    let digitoValidador1 = gerarDigitosValidadores(tamanho);
+    tamanho.push(digitoValidador1);
+    let digitoValidador2 = gerarDigitosValidadores(tamanho);
+    tamanho.push(digitoValidador2);
 
-    let convertido = cpf.join(''); 
-
-
-    const p = document.createElement('p');
-    p.id = 'id_paragrafo';
-    p.textContent = convertido; 
-    container.appendChild(p);
-
-   
     if (opcaoSelecionada.value === "true") {
-        const cpfComPontos = gerarPotucaoCPF(); 
-        p.textContent = cpfComPontos;
+       cpf = gerarPotucaoCPF(tamanho); 
+    }else{
+        cpf = limparCPF(tamanho);
     }
+   container.innerHTML = cpf;
+}
 
 
-    const btn_copiar = document.createElement('button');
-    btn_copiar.className = 'bi-copy';
-    btn_copiar.id = 'id_btn_copiar'
-    btn_copiar.textContent = 'Copiar';
-    btn_copiar.onclick = function() {
-        copiarCPF();
-    };
+function geraNumerosBase(min, max) {
+    let numerosBase = [];
+    for(let i = 0; i < 9; i++)
+    {
+        const numeroAleatorio =  Math.floor(Math.random() * (max - min + 1)) + min; 
+        numerosBase.push(numeroAleatorio);
+    }
+    return numerosBase;
+}
 
+function gerarDigitosValidadores(numerosBase){
+
+    let contador = numerosBase.length  + 1;
+    let somador  = 0;
+    let resto = 0;
+
+    numerosBase.forEach(numero => {
+        somador += numero * contador;
+        contador--;
+    });
     
-    container.appendChild(btn_copiar);
-}
-function geraValorAleatorio(min, max) {
-  return Math.floor(Math.random() * (max - min + 1)) + min; 
+    resto = calcularResto(somador);
+    return resto;
 }
 
-function validaPrimeiroNumero(array, valor1){
-    let soma = 0;
-    let contador = 0; 
-    let restoDIvisao =0;
-            
-    for (let i = valor1; i >= 2; i--) {
-        soma += array[contador] * i;
-        contador++; 
-    }
-    restoDIvisao = (soma * 10) % 11;
+function calcularResto(somaTotal){
+
+    let restoDIvisao = 0;
+
+    restoDIvisao = (somaTotal * 10) % 11;
 
     if(restoDIvisao == 10){
         restoDIvisao = 0;
-    } 
-       
-    return restoDIvisao;
-}
-
-function validaSegundoNumero(array, valor2){
-    let soma = 0;
-    let contador = 0; 
-    let restoDIvisao =0;
-            
-    for (let i = valor2; i >= 2; i--) {
-              
-        soma += array[contador] * i;
-        contador++; 
     }
-
-    restoDIvisao = (soma * 10) % 11;
-
-    if(restoDIvisao == 10){
-        restoDIvisao = 0;
-    }      
-    return restoDIvisao;
+    return restoDIvisao;      
 }
 
 function copiarCPF(){
+    const buscaCPF = document.getElementById("resposta");
+    const innerHtmlCPF = buscaCPF.innerHTML
 
-    const cpfTexto = document.getElementById('id_paragrafo').innerText;
-
-    navigator.clipboard.writeText(cpfTexto).then(() => {
-        alert("CPF copiado com sucesso!");
+    navigator.clipboard.writeText(innerHtmlCPF).then(() => {
+        alert('Copiado com Sucesso !!')
     }).catch(err => {
         console.error("Erro ao copiar: ", err);
     })
 }
 
-function gerarPotucaoCPF(){
-
-    const cpfTexto = document.getElementById('id_paragrafo').innerText;
+function gerarPotucaoCPF(valor){
+    const cpfTexto = limparCPF(valor);
     const cpfFormatado =  cpfTexto.replace(/(\d{3})(\d{3})(\d{3})(\d{2})/, "$1.$2.$3-$4");
-    alert(cpfFormatado);
     return cpfFormatado;
+}
+
+function limparCPF(valor){
+    const cpfTexto = valor.join("");
+    return cpfTexto;
+}
+
+function pegaSequenciaRepetida(vetorCPF) {
+    for (let i = 1; i < vetorCPF.length; i++) {
+        if (vetorCPF[i] !== vetorCPF[0]) {
+            return false; 
+        }
+    }
+    return true; 
 }
