@@ -4,8 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="assets/css/style.css">
- <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.13.1/font/bootstrap-icons.min.css">
-  
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.13.1/font/bootstrap-icons.min.css">
     <title>Gerador de CPFs</title>
 </head>
 <body>
@@ -21,7 +20,7 @@
                 
                 <div class="radio-group">
                     <label>
-                        <input class="" id="idSim" type="radio" name="format" value="true" checked> Com Pontuação
+                        <input id="idSim" type="radio" name="format" value="true" checked> Com Pontuação
                         <i class="bi bi-check-circle"></i>
                     </label>
                     <label>
@@ -32,8 +31,7 @@
 
                 <div class="div-botoes">
                     <button type="button" class="btn-gerador" onclick="gerarCPF()">
-                        <p class="bi bi-arrow-repeat" ></p>
-                        <p id="id_p_geraCPF">Gerar CPF</p>
+                        <i class="bi bi-arrow-repeat"></i> <span id="id_p_geraCPF">Gerar CPF</span>
                     </button>
                 </div>
                 <div class="gerar-result">
@@ -45,10 +43,103 @@
                 </div>
             </div>
         </section>
-        <p></p>
     </main>
 
-    <script src="assets/js/script.js"></script>
-    
+    <script>
+    function gerarCPF() {
+        const container = document.getElementById("resposta");
+        const opcaoSelecionada = document.querySelector('input[name="format"]:checked');
+
+        container.innerHTML = '';
+
+        let cpf = '';
+        let numerosCPF;
+
+        do {
+            numerosCPF = gerarNumerosAleatorios(0, 9);
+        } while (cpfSequenciaRepetida(numerosCPF));
+
+        let digitoValidador1 = gerarDigitoValidador(numerosCPF);
+        numerosCPF.push(digitoValidador1);
+
+        let digitoValidador2 = gerarDigitoValidador(numerosCPF);
+        numerosCPF.push(digitoValidador2);
+
+        if (opcaoSelecionada && opcaoSelecionada.value === "true") {
+            cpf = formatarCPF(numerosCPF);
+        } else {
+            cpf = juntarNumerosCPF(numerosCPF);
+        }
+
+        container.innerHTML = cpf;
+    }
+
+    function gerarNumerosAleatorios(min, max) {
+        let numerosBase = [];
+        for (let i = 0; i < 9; i++) {
+            const numeroAleatorio = Math.floor(Math.random() * (max - min + 1)) + min;
+            numerosBase.push(numeroAleatorio);
+        }
+        return numerosBase;
+    }
+
+    function gerarDigitoValidador(numerosBase) {
+        let contador = numerosBase.length + 1;
+        let somador = 0;
+        let resto = 0;
+
+        numerosBase.forEach(numero => {
+            somador += numero * contador;
+            contador--;
+        });
+
+        resto = calcularResto(somador);
+        return resto;
+    }
+
+    function calcularResto(somaTotal) {
+        let restoDivisao = (somaTotal * 10) % 11;
+        if (restoDivisao === 10) {
+            restoDivisao = 0;
+        }
+        return restoDivisao;
+    }
+
+    function copiarCpfGerado() {
+        const buscaCPF = document.getElementById("resposta");
+        const cpfTexto = buscaCPF.innerHTML;
+
+        if (!cpfTexto) {
+            alert("Gere um CPF primeiro!");
+            return;
+        }
+
+        navigator.clipboard.writeText(cpfTexto)
+            .then(() => {
+                alert("Copiado com sucesso!");
+            })
+            .catch(err => {
+                console.error("Erro ao copiar:", err);
+            });
+    }
+
+    function formatarCPF(valor) {
+        const cpfTexto = juntarNumerosCPF(valor);
+        return cpfTexto.replace(/(\d{3})(\d{3})(\d{3})(\d{2})/, "$1.$2.$3-$4");
+    }
+
+    function juntarNumerosCPF(valor) {
+        return valor.join("");
+    }
+
+    function cpfSequenciaRepetida(vetorCPF) {
+        for (let i = 1; i < vetorCPF.length; i++) {
+            if (vetorCPF[i] !== vetorCPF[0]) {
+                return false;
+            }
+        }
+        return true;
+    }
+    </script>
 </body>
 </html>
